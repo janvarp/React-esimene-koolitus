@@ -4,6 +4,7 @@ import './App.css';
 import Koduleht from './pages/Koduleht';
 import LisaToode from './pages/LisaToode';
 import Ostukorv from './pages/Ostukorv';
+import Seaded from './pages/Seaded';
 
 function App() {
   return (
@@ -24,7 +25,10 @@ function App() {
     <Link to="/lisa-toode">
     <button>Uut toodet lisama</button>
     </Link>
-   
+    
+    <Link to='/seaded'>  
+    <button>Seaded</button>
+    </Link>
 
     {/* localhost:3000                "Tere" */}
     {/* localhost:3000/ostukorv    "Ostukorv" */}
@@ -32,6 +36,8 @@ function App() {
       <Route path='' element={ <Koduleht/> } />
       <Route path='ostukorv' element={ <Ostukorv /> } />
       <Route path='lisa-toode' element={ <LisaToode/> } />
+      <Route path='seaded' element={ <Seaded/> } />
+      <Route path='*' element={ <Koduleht />} />
     </Routes>
 
     </div>
