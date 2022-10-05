@@ -4,6 +4,7 @@ import './App.css';
 import Koduleht from './pages/Koduleht';
 import LisaToode from './pages/LisaToode';
 import Ostukorv from './pages/Ostukorv';
+import Poed from './pages/poed';
 import Seaded from './pages/Seaded';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
       <Route path='ostukorv' element={ <Ostukorv /> } />
       <Route path='lisa-toode' element={ <LisaToode/> } />
       <Route path='seaded' element={ <Seaded/> } />
+      <Route path='poed' element={ <Poed/> } />
       <Route path='*' element={ <Koduleht />} />
     </Routes>
 
