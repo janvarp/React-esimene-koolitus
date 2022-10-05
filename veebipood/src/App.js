@@ -4,7 +4,7 @@ import './App.css';
 import Koduleht from './pages/Koduleht';
 import LisaToode from './pages/LisaToode';
 import Ostukorv from './pages/Ostukorv';
-import Poed from './pages/poed';
+import Poed from './pages/Poed';
 import Seaded from './pages/Seaded';
 
 function App() {
@@ -29,6 +29,10 @@ function App() {
     
     <Link to='/seaded'>  
     <button>Seaded</button>
+    </Link>
+
+    <Link to='/poed'>  
+    <button>Poed</button>
     </Link>
 
     {/* localhost:3000                "Tere" */}
