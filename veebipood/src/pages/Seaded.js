@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 function Seaded() {
 const [keel, uuendaKeel] = useState(localStorage.getItem('veebilehe_keel') || 'EST');
+const telRef = useRef(); // ref - inputi seest vaartuse kattesaamiseks
+const emailRef = useRef();
 
+// ---KOODI VÄRVIDE TÄHENDUSED
 // tumesinine - function, const (deklareerin tüübi), HTMLs on tag <div> <img>
 // sinine - meie tehtud muutuja
 // helesinine - JavaScripti enda muutuja, HTMLi atribuut  --- src="", onClick="", className=""
@@ -29,8 +32,26 @@ const [keel, uuendaKeel] = useState(localStorage.getItem('veebilehe_keel') || 'E
     localStorage.setItem("veebilehe_keel", uusKeel);
     }
 
+    const salvetsaTel = () => {
+        localStorage.setItem("telefon", telRef.current.value);
+    }
+    // localStorage-s salvestame setItem abil, andes kaasa votme ja vaarstuse mille salvestan
+    // salvestame et teha kuskil mujal getItem
+
+    const salvestaEmail = () => {
+        localStorage.setItem("email", emailRef.current.value);
+    }
+
     return ( 
     <div>
+        <label>Meie telefoninumber</label>
+        <input ref={telRef} type="text" />
+        <button onClick={salvetsaTel}>Sisesta</button>
+        <br />
+        <label>Meie email</label>
+        <input ref={emailRef} type="text" />
+        <button onClick={salvestaEmail}>Sisesta</button>
+
         <button onClick={() => muudaKeel("EST")}>Muuda eesti keelseks</button>
         <button onClick={() => muudaKeel("ENG")}>Muuda inglise keelseks</button>
         <button onClick={() => muudaKeel("RUS")}>Muuda vene keelseks</button>
