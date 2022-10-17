@@ -45,11 +45,11 @@ const emailRef = useRef();
     return ( 
     <div>
         <label>Meie telefoninumber</label>
-        <input ref={telRef} type="text" />
+        <input ref={telRef} defaultValue={localStorage.getItem("telefon")} type="text" />
         <button onClick={salvetsaTel}>Sisesta</button>
         <br />
         <label>Meie email</label>
-        <input ref={emailRef} type="text" />
+        <input ref={emailRef} defaultValue={localStorage.getItem("email")} type="text" />
         <button onClick={salvestaEmail}>Sisesta</button>
 
         <button onClick={() => muudaKeel("EST")}>Muuda eesti keelseks</button>
