@@ -8,7 +8,14 @@ function UksikToode() {
 
     return ( 
     <div>
-        {leitudToode !== undefined && <div>{leitudToode}</div> }
+        {leitudToode !== undefined && 
+        <div>
+        <div>{leitudToode.nimi}</div>
+        <div>{leitudToode.hind}</div>
+        <img src={leitudToode.pilt} alt="" />
+        <div>{leitudToode.aktiivne + 0}</div>
+        </div>
+        }
         {leitudToode === undefined && <div>Toodet ei leitud</div> }
         </div> );
 }

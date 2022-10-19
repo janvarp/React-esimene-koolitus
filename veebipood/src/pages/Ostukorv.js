@@ -22,6 +22,13 @@ function Ostukorv() {
         localStorage.setItem("ostukorv", JSON.stringify([]));
     }
 
+    const arvutaKogusumma = () => {
+        let kogusumma = 0;
+        ostukorv.forEach(element => kogusumma = kogusumma + element.hind);
+        return kogusumma;
+
+}
+
     return ( 
     <div>
         {ostukorv.length === 0 && <div>Ostukorv on tuhi!</div>}
@@ -33,6 +40,7 @@ function Ostukorv() {
                 <button onClick={() => kustuta(jarjekorraNumber)}>x</button>
                 <button onClick={() => lisa(element)}>Lisa</button>
             </div>)}
+            <div>Kokku: {arvutaKogusumma()} €</div>
         </div> );
 }
 

@@ -1,11 +1,10 @@
 // kogus = useState(5)    ---> a) 0  b) kogus-1 => 5-1 => 4
-// s6num = useState("Tere")   ---> a) "Edukalt lisatud"  b) "MIdagi on puudu"
+// s6num = useState("Tere")   ---> a) "Edukalt lisatud"  b) "Midagi on puudu"
 // array = useState(["uks", "kaks", "kolm"])  ---> ["uks","kaks"]
 
 import { useRef, useState } from "react";
 
 function Poed() {
-    const [poed, uuendaPoed] = useState(["Kristiine","Mustam2e","Kesklinn","6ism2e","P6hja-Tallinn","Lasnam2e"])
     const poodRef = useRef();
 
     const sortAZ = () => {
@@ -24,25 +23,39 @@ function Poed() {
                             // kask HTMLi muutmiseks on useState parempoolen funktsioon const [vasak,parem] = useState(algavaartus)
 }
 
+    const aegRef = useRef();
+
     const lisa = () => {
-        poed.push(poodRef.current.value);
+        poed.push({nimi: poodRef.current.value, aeg: aegRef.current.value});
         uuendaPoed(poed.slice());
     }
 
     const filtreeri = () => {
-        const vastus = poed.filter(element => element.includes("m2e"));
+        const vastus = poed.filter(element => element.nimi.includes("m2e"));
         uuendaPoed(vastus);
     }
 
     const muudaK6iki = () => {
-        const vastus = poed.map(element => element + "--");
+        const vastus = poed.map(element => {return {...element, nimi: element.nimi + "--"}});
         uuendaPoed(vastus);
     }
+
+    const [poed, uuendaPoed] = useState([
+         {nimi: "Kristiine"     , aeg: "9-12"},
+         {nimi: "Mustam2e"      , aeg: "10-21"},
+         {nimi: "Kesklinn"      , aeg: "10-21"},
+         {nimi: "6ism2e"        , aeg: "10-21"},
+         {nimi: "P6hja-Tallinn" , aeg: "10-21"},
+         {nimi: "Lasnam2e"      , aeg: "10-21"},
+        ]);
+
 
     return ( 
     <div>
         <label>Uus pood</label> <br />
         <input ref={poodRef} type="text" /> <br />
+        <label>Uue poe lahtiolekuaeg</label> <br />
+        <input ref={aegRef} type="text" /> <br />
         <button onClick={lisa}>Sisesta</button> <br />
 
         <button onClick={sortAZ}>Sorteeri A-Z</button>
@@ -53,19 +66,22 @@ function Poed() {
         {/* .map() on funktsionaalsus, mis kehtib alati array-dele
          map on ukshaaval iga elemendi v]tmine ja tema muutmine html-ks*/}
         <div>{["","",""].map((e,i) => <div key={i}>{i}. Tere</div>)}</div>
+
+         <br /><br />
+
         <div>{poed.map((pood, index) =>
-        <div key={pood}>
-            {pood}
+        <div key={index}>
+            {pood.nimi} {pood.aeg}
              <button onClick={() =>kustuta(index)}>x</button>
              </div>)}
         </div>
 
-        <div key={"Kristiine"}>Kristiine <button onClick={() => kustuta(0)}>x</button> </div>
-        <div key={"Mustam2e"}>Mustam2e <button onClick={() => kustuta(1)}>x</button> </div>
-        <div key={"Kesklinn"}>Kesklinn <button onClick={() => kustuta(2)}>x</button> </div>
-        <div key={"6ism2e"}>6ism2e <button onClick={() => kustuta(3)}>x</button> </div>
-        <div key={"P6hja-Tallinn"}>P6hja-Tallinn <button onClick={() => kustuta(4)}>x</button> </div>
-        <div key={"L2snam2e"}>Lasnam2e <button onClick={() => kustuta(5)}>x</button> </div>
+        <div key={0}> Kristiine 9-22 <button onClick={() => kustuta(0)}>x</button> </div>
+        <div key={1}>Mustam2e <button onClick={() => kustuta(1)}>x</button> </div>
+        <div key={2}>Kesklinn <button onClick={() => kustuta(2)}>x</button> </div>
+        <div key={3}>6ism2e <button onClick={() => kustuta(3)}>x</button> </div>
+        <div key={4}>P6hja-Tallinn <button onClick={() => kustuta(4)}>x</button> </div>
+        <div key={5}>Lasnam2e <button onClick={() => kustuta(5)}>x</button> </div>
     </div>  );
 }
 
