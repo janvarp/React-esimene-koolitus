@@ -1,22 +1,27 @@
+import { Link, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Avaleht from './pages/Avaleht';
+import LisaTegelane from './pages/LisaTegelane';
+import ValitudTegelased from './pages/ValitudTegelased';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Link to='/'>
+        <button>Avalehele</button>
+      </Link>
+      <Link to='/lisa-tegelane'>
+        <button>Avalehele</button>
+      </Link>
+      <Link to='/valitud-tegelane'>
+        <button>Avalehele</button>
+      </Link>
+      <Routes>
+        <Route path='' element={ <Avaleht /> } />
+        <Route path='lisa-tegelane' element={ <LisaTegelane /> } />
+        <Route path='valitud-tegelased' element={ <ValitudTegelased /> } />
+      </Routes>
     </div>
   );
 }
