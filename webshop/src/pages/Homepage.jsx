@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
 import productsFromFile from "../data/products.json";
+import { ToastContainer, toast } from 'react-toastify';
 
 function Homepage() {
     const [products, setProducts] = useState(productsFromFile);
@@ -37,10 +38,18 @@ function Homepage() {
     const addToCart = (productClicked) => {
         // samamoodi nagu eesti keeeles
         // const cart = sessionStorage.getItem("cart")
+
+        toast(t('🦄 Edukalt ') + productClicked.name + t("ostukorvi lisatud!"),{
+        //toast('🦄 Edukalt ${productClicked.name} ostukorvi lisatud!',{
+            position: "bottom-right",
+            autoClose: 5000,
+            theme: "dark",
+            });
     }
 
     return ( 
     <div>
+         <ToastContainer />
         {categories.map(element =>
              <Button key={element} onClick={() => filterByCategory(element)}>{t(element)}</Button>)}
         <div>{products.length} tk</div>
@@ -53,6 +62,7 @@ function Homepage() {
                 <img src={element.image} alt="" />
                 <div>{element.name}</div>
                 <div>{element.price}</div>
+                <Button onClick={() => addToCart(element)}>Lisa ostukorvi</Button>
                 </div>)}
     </div> );
 }

@@ -1,5 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import { toast } from "react-toastify";
 
 // the translations
 // (tip move them in a JSON file and import them,
@@ -11,6 +12,8 @@ const resources = {
       "nav.shops": "Shops",
       "nav.about": "About us",
       "nav.cart": "Cart",
+      "toast.cart-successful": "🦄 Successfully",
+      "toast.to-cart": "to cart",
     }
   },
   ee: {
@@ -19,6 +22,8 @@ const resources = {
       "nav.shops": "Poed",
       "nav.about": "Meist",
       "nav.cart": "Ostukorv",
+      "toast.cart-successful": "🦄 Edukalt",
+      "toast.to-cart": "ostukorvi lisatud",
     }
   }
 };
