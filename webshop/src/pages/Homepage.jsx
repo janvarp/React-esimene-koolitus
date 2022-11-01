@@ -36,8 +36,11 @@ function Homepage() {
     }
 
     const addToCart = (productClicked) => {
-        // samamoodi nagu eesti keeeles
-        // const cart = sessionStorage.getItem("cart")
+        let cartLS = localStorage.getItem("cart");
+        cartLS = JSON.parse(cartLS) || [];
+        cartLS.push(klikitudToode);
+        cartLS = JSON.stringify(cartLS);
+        localStorage.setItem("cart", cartLS);
 
         toast(t('🦄 Edukalt ') + productClicked.name + t("ostukorvi lisatud!"),{
         //toast('🦄 Edukalt ${productClicked.name} ostukorvi lisatud!',{
@@ -49,9 +52,9 @@ function Homepage() {
 
     return ( 
     <div>
-         <ToastContainer />
+    <ToastContainer />
         {categories.map(element =>
-             <Button key={element} onClick={() => filterByCategory(element)}>{t(element)}</Button>)}
+        <Button key={element} onClick={() => filterByCategory(element)}>{t(element)}</Button>)}
         <div>{products.length} tk</div>
         <Button onClick={sortAZ}>Sorteeri A-Z</Button>
         <Button onClick={sortZA}>Sorteeri Z-A</Button>
@@ -63,7 +66,7 @@ function Homepage() {
                 <div>{element.name}</div>
                 <div>{element.price}</div>
                 <Button onClick={() => addToCart(element)}>Lisa ostukorvi</Button>
-                </div>)}
+            </div>)}
     </div> );
 }
 
