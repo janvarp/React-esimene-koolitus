@@ -36,11 +36,16 @@ function Homepage() {
     }
 
     const addToCart = (productClicked) => {
-        let cartLS = localStorage.getItem("cart");
-        cartLS = JSON.parse(cartLS) || [];
-        cartLS.push(klikitudToode);
-        cartLS = JSON.stringify(cartLS);
-        localStorage.setItem("cart", cartLS);
+        let cartSS = sessionStorage.getItem("cart");
+        cartSS = JSON.parse(cartSS) || [];
+        const index = cartSS.findIndex(element => element.id === productClicked.id);
+    if (index >= 0) {
+        cartSS[index].quantity = cartSS[index].quantity + 1;
+    } else {
+        cartSS.push({"id": productClicked.id, "quantity": 1});
+    }
+        cartSS = JSON.stringify(cartSS);
+        sessionStorage.setItem("cart", cartSS);
 
         toast(t('🦄 Edukalt ') + productClicked.name + t("ostukorvi lisatud!"),{
         //toast('🦄 Edukalt ${productClicked.name} ostukorvi lisatud!',{
