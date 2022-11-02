@@ -18,15 +18,11 @@ const removeFromCart = (productClicked) => {
     cart.splice(productClicked,1); 
         console.log(cart);
         setCart(cart.slice()); 
-        sessionStorage.setItem("cart", JSON.stringify(cart));
+        sessionStorage.setItem("cart", JSON.stringify(cartSS));
 
 }
 
-const addToCart = (productClicked) => {
-    cart.push(productClicked);
-    setCart(cart.slice()); 
-    sessionStorage.setItem("cart", JSON.stringify(cart));
-}
+
 
 const calculateCartSum = () => {
     let cartsum = 0;
@@ -69,11 +65,11 @@ const emptyCart = () => {
                 <img src={element.product.image} alt="" />
                 <div>{element.product.name}</div>
                 <button onClick={() => decreaseQuantity(productClicked)} >-</button>
-                <div>{element.product.quantity}</div>
+                <div>{element.quantity}</div>
                 <button onClick={() => increaseQuantity(productClicked)} >+</button>
                 <div>{(element.product.price * element.quantity).toFixed(2)}</div>
                 <button onClick={() => removeFromCart(productClicked)}>x</button>
-                <button onClick={() => addToCart(element)}>Add</button>
+                
             </div>)}
             <div>Wholesum: {calculateCartSum()} €</div>
     </div>
