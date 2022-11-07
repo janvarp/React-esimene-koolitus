@@ -4,6 +4,7 @@ import productsFromFile from "../data/products.json"
 function Cart() {
     const [cart, setCart] = useState( [] );
     const cartSS = useMemo(() => JSON.parse(sessionStorage.getItem("cart")) || [], []);
+    const [parcelMachines, setParcelMachines] = useState([]);
 
     //uef
     useEffect(() => {
@@ -11,6 +12,11 @@ function Cart() {
             return {"product": productsFromFile.find(product => product.id === element.id), quantity: element.quantity}
         });
         setCart(cartWithProducts);
+
+        fetch("https://www.omniva.ee/locations.json")
+        .then(res => res.json())
+        .then(json => setParcelMachines(json))
+
     }, [cartSS]);
 
 const removeFromCart = (productClicked) => {
@@ -71,6 +77,13 @@ const emptyCart = () => {
                 <button onClick={() => removeFromCart(productClicked)}>x</button>
                 
             </div>)}
+            <select>
+                {parcelMachines
+                .filter(element => element.A0_NAME === "EE" && element.ZIP !== "96331")
+                .map(element =>
+                 <option>{element.NAME}</option>)}
+            </select>
+
             <div>Wholesum: {calculateCartSum()} €</div>
     </div>
      );
