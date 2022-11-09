@@ -1,13 +1,18 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import productsFromFile from "../../data/products.json";
+// import productsFromFile from "../../data/products.json";
+import config from "../../data/config.json"
+import Spinner from 'react-bootstrap/Spinner';
 
 function EditProduct() {
    
     const params = useParams();
-    const products = productsFromFile;
-    const productFound = products.find(element => element.id === Number(params.productId));
-    const index = products.indexOf(productFound);
+    const [isLoading, setIsLoading] = useState(true);
+    // const products = productsFromFile;
+    const [idUnique, setIdUnique] = useState(true);
+    const [dbProducts, setDbProducts] = useState([]);
+    const productFound = dbProducts.find(element => element.id === Number(params.productId));
+    const index = dbProducts.indexOf(productFound);
 
     const idRef = useRef();
     const nameRef = useRef();
@@ -17,6 +22,17 @@ function EditProduct() {
     const descriptionRef = useRef();
     const activeRef = useRef();
     const navigate = useNavigate();
+    
+
+    useEffect(() => {
+        fetch(config.productsDbUrl)
+        .then(res => res.json())                                 
+        .then(json => {
+            setDbProducts(json.slice())
+            setIsLoading(false)
+        });                        
+    }, []);
+
 
     const changeProduct = () => {
         const newProduct = {
@@ -27,16 +43,22 @@ function EditProduct() {
             "category": categoryRef.current.value,
             "description": descriptionRef.current.value,
             "active": activeRef.current.checked,
-        }
-        products[index] = newProduct;
+        };
+        dbProducts[index] = newProduct;
+        fetch(config.productsDbUrl, {
+            "method": "PUT",
+            "body": JSON.stringify(dbProducts)
+        }).then (() => {
+        // setProducts(dbProducts.slice());
+        // searchProducts();
+        // toast.error("Toode kustutatud");
         navigate("/admin/maintain-products");
+      })
     }
-
-        const [idUnique, setIdUnique] = useState(true);
 
         const checkIfIdUnique = () => {
           if (params.productId !== idRef.current.value) {
-           const found = productsFromFile.find(element => element.id === Number(idRef.current.value));
+            const found = dbProducts.find(element => element.id === Number(idRef.current.value));
             if (found === undefined) {
                 console.log("ON UNIKAALNE");
                 setIdUnique(true);
@@ -49,9 +71,11 @@ function EditProduct() {
                 setIdUnique(true);
         }
     }
+
    
     return ( 
     <div>
+    { isLoading && <Spinner animation="border" />}
     { productFound !== undefined && 
         <div>
         {idUnique === false && <div>Sisestatud ID ei ole unikaalne!</div>}
@@ -72,7 +96,7 @@ function EditProduct() {
         <button disabled={idUnique === false} onClick={changeProduct}>Change</button>
       </div>
       }
-      { productFound !== undefined &&
+      { productFound !== undefined && isLoading === false &&
        <div>
             Toodet ei leitud
         </div>

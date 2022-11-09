@@ -1,22 +1,39 @@
-import { useRef, useState } from "react";
-import productsFromFile from "../../data/products.json";
+import { useEffect, useRef, useState } from "react";
+// import productsFromFile from "../../data/products.json";
 import Button from "react-bootstrap/Button";
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from "react-router-dom";
+import config from "../../data/config.json";
 
 function MaintainProducts() {
-    const [products, setProducts] = useState(productsFromFile);
+    const [dbProducts, setDbProducts] = useState([]);
+    const [products, setProducts] = useState([]);
     const searchedProductRef = useRef();
 
+    useEffect(() => {
+        fetch(config.productsDbUrl)
+        .then(res => res.json())                                 
+        .then(json => {
+            setProducts(json.slice());
+            setDbProducts(json.slice());
+        })                         
+    }, []);
+
     const remove = (product) => {
-        const index = productsFromFile.findIndex(element => element.id === product.id);
-    productsFromFile.splice(index,1);
-    setProducts(productsFromFile.slice());
-    toast("Toode kustutatud");
+    const index = dbProducts.findIndex(element => element.id === product.id);
+    dbProducts.splice(index,1);
+    fetch(config.productsDbUrl, {
+        "method": "PUT",
+        "body": JSON.stringify(dbProducts)
+    }).then (() => {
+    setProducts(dbProducts.slice());
+    searchProducts();
+    toast.error("Toode kustutatud");
+})
 }
 
     const searchProducts = () => {
-      const result = productsFromFile.filter(element =>
+      const result = dbProducts.filter(element =>
          element.name.toLowerCase().includes(searchedProductRef.current.value.toLowerCase())
          );
       setProducts(result);

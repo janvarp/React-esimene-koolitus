@@ -1,13 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
-import productsFromFile from "../data/products.json";
+// import productsFromFile from "../data/products.json";
 import { ToastContainer, toast } from 'react-toastify';
+import config from "../data/config.json";
 
 function Homepage() {
-    const [products, setProducts] = useState(productsFromFile);
-    const categories = [...new Set(productsFromFile.map(element => element.category))];
+    const [dbProducts, setDbProducts] = useState([]);
+    const [products, setProducts] = useState([]);
+    const categories = [...new Set(dbProducts.map(element => element.category))];
     const { t } = useTranslation();
+
+    useEffect(() => {
+        fetch(config.productsDbUrl)
+        .then(res => res.json())                                  // .then(tagastus => tagastus.json())
+        .then(json => {
+            setProducts(json.slice());
+            setDbProducts(json.slice());
+        })                          // .then(andmed => console.log(andmed))
+     
+    }, []);
 
     const sortAZ = () => {
         products.sort((a, b) => a.name.localeCompare(b.name));
@@ -30,7 +42,7 @@ function Homepage() {
     }
 
     const filterByCategory = (categoryClicked) => {
-        const result = productsFromFile.filter(element => element.category === categoryClicked);
+        const result = dbProducts.filter(element => element.category === categoryClicked);
         setProducts(result);
 
     }

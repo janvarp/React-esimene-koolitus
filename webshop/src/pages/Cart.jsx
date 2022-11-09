@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import productsFromFile from "../data/products.json"
+import config from "../data/config.json"
 
 function Cart() {
     const [cart, setCart] = useState( [] );
@@ -8,10 +8,15 @@ function Cart() {
 
     //uef
     useEffect(() => {
-        const cartWithProducts = cartSS.map(element => {
-            return {"product": productsFromFile.find(product => product.id === element.id), quantity: element.quantity}
-        });
-        setCart(cartWithProducts);
+        fetch(config.productsDbUrl)
+        .then(res => res.json())                                 
+        .then(json => {
+            const cartWithProducts = cartSS.map(element => {
+            return {"product": json.find(product => product.id === element.id), quantity: element.quantity}
+            }).filter(element => element !==undefined);
+            setCart(cartWithProducts);
+        }) 
+        
 
         fetch("https://www.omniva.ee/locations.json")
         .then(res => res.json())

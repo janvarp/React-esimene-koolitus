@@ -21,3 +21,6 @@ function SingleProduct() {
 }
 
 export default SingleProduct;
+
+
+// teha editproducti járgi
