@@ -1,11 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
 import config from "../data/config.json"
 import styles from "../css/Cart.module.css";
+import { Link } from "react-router-dom";
+import ParcelMachines from "../components/ParcelMachines";
+import Payment from "../components/Payment";
+import CartSumContext from '../store/CartSumContext';
+import { useContext } from "react";
+
 
 function Cart() {
     const [cart, setCart] = useState( [] );
     const cartSS = useMemo(() => JSON.parse(sessionStorage.getItem("cart")) || [], []);
-    const [parcelMachines, setParcelMachines] = useState([]);
+
+    const cartSumCtx = useContext(CartSumContext);
+    
 
     //uef
     useEffect(() => {
@@ -19,9 +27,7 @@ function Cart() {
         }) 
         
 
-        fetch("https://www.omniva.ee/locations.json")
-        .then(res => res.json())
-        .then(json => setParcelMachines(json))
+        
 
     }, [cartSS]);
 
@@ -47,11 +53,12 @@ const decreaseQuantity =(productClicked) => {
     cartSS[productClicked].quantity = cartSS[productClicked].quantity - 1;
     cart[productClicked].quantity = cart[productClicked].quantity - 1;
     if (cartSS[productClicked].quantity <= 0) {
-        removeFromCart(productClicked);
+      removeFromCart(productClicked);
     } else {
-    setCart(cart.slice());
-    sessionStorage.setItem("cart", JSON.stringify(cartSS));
-}
+      setCart(cart.slice());
+      sessionStorage.setItem("cart", JSON.stringify(cartSS));
+    }
+    cartSumCtx.setCartSum(calculateCartSum());
 }
 
 const increaseQuantity =(productClicked) => {
@@ -59,46 +66,26 @@ const increaseQuantity =(productClicked) => {
     cart[productClicked].quantity = cart[productClicked].quantity + 1;
     setCart(cart.slice());
     sessionStorage.setItem("cart", JSON.stringify(cartSS));
+    cartSumCtx.setCartSum(calculateCartSum());
 }
 
 const emptyCart = () => {
     setCart([]);
         sessionStorage.setItem("cart", JSON.stringify([]));
+        cartSumCtx.setCartSum(0);
     
 }
 
-const pay = () => {
-    // enne maksma hakkamist ma salvestan tellimuse andmebaasi
 
-    const paymentData = {
-            "api_username": "92ddcfab96e34a5f",         // kasutajanimi, mis peab uhtima headersis oleva kasutajanimega
-            "account_name": "EUR3D1",       // konto nimi
-            "amount": calculateCartSum(),              // kogusumma
-            "order_reference": Math.random()*999999,   // tellimuse nr, error kui see tellimuse nr on juba tasutud
-            "nonce": "a9124858oihhloltere902" + Math.random()*999999 + new Date(),      // turvaelement, iga p'ring peab olmea unikaalne
-            "timestamp": new Date(),       // turvaelement, ajatempel
-            "customer_url": "https://nepla.web.app"         // aadress, kuhu teda hiljem tagasi suunatakse
-    }
-    const headersData = {
-        "Authorization": "Basic OTJkZGNmYWI5NmUzNGE1Zjo4Y2QxOWU5OWU5YzJjMjA4ZWU1NjNhYmY3ZDBlNGRhZA==",
-        "Content-Type": "application/json"
-    }
-    fetch("https://igw-demo.every-pay.com/api/v4/payments/oneoff",{
-        "method": "POST",
-        "body": JSON.stringify(paymentData),
-        "headers": headersData
-    }).then(res => res.json())
-      .then(json => window.location.href = json.payment_link)
-}
 
     return ( 
     <div>
-        <div className={styles.cart__top}>
+        { cart.length > 0 && <div className={styles.cart__top}>
             <button onClick={emptyCart}>Tuhjenda</button>
             <div>Toodete koguarv {cart.length} tk</div>
-        </div>
+        </div> }
 
-        {cart.map((element, productClicked) =>
+        { cart.map((element, productClicked) =>
             <div key={productClicked} className={styles.product}>
                 <img className={styles.image} src={element.product.image} alt="" />
                 <div className={styles.name}>{element.product.name}</div>
@@ -113,17 +100,14 @@ const pay = () => {
 
         </div>)}
                 
-            <div className={styles.cart__bottom}>
-            <select>
-                {parcelMachines
-                .filter(element => element.A0_NAME === "EE" && element.ZIP !== "96331")
-                .map(element =>
-                 <option>{element.NAME}</option>)}
-            </select>
+         {cart.length > 0 && <div className={styles.cart__bottom}>
+            <ParcelMachines />
 
             <div>Kokku: {calculateCartSum()} €</div>
-            <button onClick={pay}>Maksma</button>
-        </div>
+            <Payment sum={calculateCartSum()} />
+        </div>}
+
+        { cart.length === 0 && <div>Ostukorv on tuhi. <Link to="/">Tooteid valima</Link> </div> }
 
     </div>);
 

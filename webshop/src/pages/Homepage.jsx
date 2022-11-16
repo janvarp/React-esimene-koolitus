@@ -4,12 +4,16 @@ import { useTranslation } from "react-i18next";
 // import productsFromFile from "../data/products.json";
 import { ToastContainer, toast } from 'react-toastify';
 import config from "../data/config.json";
+import CartSumContext from "../store/CartSumContext";
+import { useContext } from "react";
 
 function Homepage() {
     const [dbProducts, setDbProducts] = useState([]);
     const [products, setProducts] = useState([]);
     const categories = [...new Set(dbProducts.map(element => element.category))];
     const { t } = useTranslation();
+
+    const cartSumCtx = useContext(CartSumContext);
 
     useEffect(() => {
         fetch(config.productsDbUrl)
@@ -56,6 +60,21 @@ function Homepage() {
     } else {
         cartSS.push({"id": productClicked.id, "quantity": 1});
     }
+
+    const cartWithProducts = cartSS.map(element => {
+        const productFound = dbProducts.find(product => product.id === element.id);
+        return productFound !== undefined ? {"product": productFound, "quantity": element.quantity} : undefined;
+        }).filter(element => element !==undefined);
+
+        let cartSum = 0
+
+        cartWithProducts.forEach(element => cartSum = cartSum + element.product.price * element.quantity);
+
+    cartSumCtx.setCartSum(cartSum.toFixed(2));
+
+
+
+
         cartSS = JSON.stringify(cartSS);
         sessionStorage.setItem("cart", cartSS);
 
@@ -65,6 +84,8 @@ function Homepage() {
             autoClose: 5000,
             theme: "dark",
             });
+
+            
     }
 
     return ( 
