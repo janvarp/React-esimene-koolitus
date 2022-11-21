@@ -1,4 +1,4 @@
-import {Route, Routes } from "react-router-dom"
+import {Navigate, Route, Routes } from "react-router-dom"
 import './App.css';
 import Homepage from "./pages/Homepage.jsx";
 import Cart from "./pages/Cart.jsx";
@@ -12,11 +12,15 @@ import MaintainCategories from "./pages/admin/MaintainCategories.jsx";
 import MaintainProducts from "./pages/admin/MaintainProducts.jsx";
 import MaintainShops from "./pages/admin/MaintainShops.jsx";
 import NavigationBar from "./components/NavigationBar";
-
-
-
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import { useContext } from 'react';
+import AuthContext from './store/AuthContext'
 
 function App() {
+
+  const authCtx = useContext(AuthContext);
+
   return (
     <div>
      <NavigationBar />
@@ -27,12 +31,22 @@ function App() {
         <Route path="about-us" element={ <AboutUs/>}/>
         <Route path="shops" element={ <Shops/>}/>
         <Route path="product" element={ <SingleProduct/>}/>
+        <Route path="login" element={ <Login/>}/>
+        <Route path="signup" element={ <Signup/>}/>
+
+        { authCtx.loggedIn === true &&
+          <>
         <Route path="admin/add-product" element={ <AddProduct/>}/>
         <Route path="admin" element={ <AdminHome/>}/>
         <Route path="admin/edit-product/:productId" element={ <EditProduct/>}/>
         <Route path="admin/maintain-categories" element={ <MaintainCategories/>}/>
         <Route path="admin/maintain-products" element={ <MaintainProducts/>}/>
         <Route path="admin/maintain-shops" element={ <MaintainShops/>}/>
+        </>}
+        { authCtx.loggedIn === false &&
+         <Route path="admin/*" element={ <Navigate to="/login" />} />
+        }
+        <Route path="*" element={ <div>404</div> }/>
       </Routes>
     </div>
   );
