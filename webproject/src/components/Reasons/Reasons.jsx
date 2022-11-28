@@ -23,10 +23,40 @@ const Reasons = () => {
 
             <div>
                 <span className='stroke-text'>miks</span>
-                <span>valida mind?</span>
+                <span> valida mind?</span>
             </div>
-        </div>
-    </div>
+
+            <div className='details-r'>
+            <div>
+              <img src={tick} alt="" />
+              <span>Lorem Ipsum</span>
+            </div>
+            <div>
+              <img src={tick} alt="" />
+              <span>Lorem Ipsum</span>
+            </div>
+            <div>
+              <img src={tick} alt="" />
+              <span>Lorem Ipsum</span>
+            </div>
+            <div>
+              <img src={tick} alt="" />
+              <span>Lorem Ipsum</span>
+            </div>
+          </div>
+          <span style={{
+            color : 'var(--gray)', fontWeight: 'normal',
+            }}
+            >MINU SPONSORID
+            </span>
+
+            <div className="partner">
+              <img src={nb} alt="" />
+              <img src={adidas} alt="" />
+              <img src={nike} alt="" />
+            </div>
+      </div>
+  </div>
   )
 }
 

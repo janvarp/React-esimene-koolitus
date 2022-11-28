@@ -1,7 +1,11 @@
 import './App.css';
 import Hero from './components/Hero/Hero';
 import Pictures from './components/Pictures/Pictures';
+import Plans from './components/Plans/Plans';
 import Reasons from './components/Reasons/Reasons';
+import Testimonials from './components/Testimonials/Testimonials';
+import Join from './components/Join/Join';
+import Footer from './components/Footer/Footer';
 
 function App() {
 
@@ -10,6 +14,10 @@ function App() {
           <Hero/>
           <Pictures/>
           <Reasons/>
+          <Plans/>
+          <Testimonials/>
+          <Join/>
+          <Footer/>
     </div>
   );
 }
