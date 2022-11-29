@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
   }
+
   .left-h {
     padding: 2rem;
     padding-top: 1.5rem;
@@ -10,11 +11,13 @@
     flex-direction: column;
     gap: 2rem;
   }
+  
   .right-h {
-    background-color: #f48916;
+    background: var(--planCard);
     flex: 1;
     position: relative;
   }
+
   .hero-blur {
     width: 22rem;
     height: 30rem;
@@ -133,8 +136,9 @@
   
   .hero-image {
     position: absolute;
-    top: 10rem;
-    right: 8rem;
+    top: 16.6rem;
+    right: 6rem;
+    height: 30rem;
     width: 23rem;
   }
   .hero-image-back {

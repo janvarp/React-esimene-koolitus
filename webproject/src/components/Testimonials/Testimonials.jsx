@@ -14,9 +14,9 @@ const Testimonials = () => {
   return (
     <div className="testimonials">
       <div className="left-t">
-        <span>Testimonials</span>
-        <span className="stroke-text">What they</span>
-        <span>say about us</span>
+        <span>Arvustused</span>
+        <span className="stroke-text">Mida arvatakse</span>
+        <span>minust</span>
         <motion.span
           key={selected}
           initial={{ opacity: 0, x: -100 }}

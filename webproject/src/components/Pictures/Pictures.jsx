@@ -1,7 +1,10 @@
 import React from 'react'
+
 import './Pictures.css'
 import { programsData } from '../../data/programsData'
-import RightArrow from '../../assets/rightArrow.png'
+import { motion } from "framer-motion";
+
+
 
 const Pictures = () => {
   return (
@@ -10,22 +13,21 @@ const Pictures = () => {
         <div className="pictures-header">
             <span className='stroke-text'>Vaata minu</span>
             <span>Eelnevalt</span>
-            <span className='stroke-text'>Tehtud pilte</span>
+            <span className='stroke-text'>tehtud pilte</span>
         </div>
 
-        <div className="picture-categories">
-            {programsData.map((program)=>(
-                <div className="category">
-                    {program.image}
-                    <span>{program.heading}</span>
-                    <span>{program.details}</span>
-                    <div className="join-now">
-                        <span>Join now</span>
-                        <img src={RightArrow} alt=''></img>
-                    </div>
-                </div>
+{/* lahtrid */}
+        <div onClick='https://www.instagram.com/simplyjants/'  className="picture-categories">
+        {programsData.map((program)=>(
+            <motion.div
+            whileHover={{background: 'var(--planCard)', cursor: 'pointer'}}
+            transition={{type: 'spring'}}
+            className="category">
+              <img src={program.image} alt='' />
+            
+            </motion.div>
             ))}
-        </div>
+      </div>
     </div>
     
   )

@@ -7,12 +7,14 @@ import heart from '../../assets/heart.png'
 import calories from '../../assets/calories.png'
 import { motion } from "framer-motion";
 import CountUp from 'react-countup';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import {BrowserRouter as Router, } from 'react-router-dom';
 
 const Hero = () => {
   const transition = { duration: 3, type: "spring" };
   const mobile = window.innerWidth<=768 ? true:false;
   return (
+    <Router>
     <div className='hero' id='home'>
 
       <div className="blur hero-blur"></div>
@@ -22,11 +24,11 @@ const Hero = () => {
 {/*the best ad*/}
 
           <div className="the-best-ad">
-            <motion.div>
-              initial={{left: mobile? "178px": '238px'}}
+            <motion.div
+              initial={{left: {mobile}? "178px": '238px'}}
               whileInView={{left: '8px'}}
               transition={{...transition, type: 'tween'}}
-            </motion.div>
+            />
             <span>eesti parim autofotograaf linnas</span>
           </div>
 
@@ -48,36 +50,37 @@ const Hero = () => {
           <div className="figures">
           <div>
             <span>
-              <CountUp end={81} start={0} delay={4} preFix="+" />
+              <CountUp end={81} start={0} delay={0} preFix="+" />
             </span>
-            <span>expert coaches</span>
+            <span>posts</span>
           </div>
           <div>
             <span>
-              <CountUp end={595} start={250} delay={4} preFix="+" />
+              <CountUp end={596} start={250} delay={0} preFix="+" />
             </span>
-            <span>Members joined</span>
+            <span>followers</span>
           </div>
           <div>
             <span>
-              <CountUp end={1127} start={1000} delay={4} preFix="+" />
+              <CountUp end={1127} start={1000} delay={0} preFix="+" />
             </span>
-            <span>fitness programs</span>
+            <span>following</span>
           </div>
           </div>
 
-{/* her-buttons */}
+{/* her-buttons */} 
           <div className="hero-buttons">
-            <buttons className="btn">Alusta</buttons>
-            <buttons className="btn">Uuri veel</buttons>
+            <button className="btn">Alusta</button>
+            <button className="btn">Uuri veel</button>
           </div>
         </div>
       <div className='right-h'>
       <button className="btn">
-          <Link to = 'join-us' smooth={true} spy={true}>
+          <Link to = 'join-us' smooth='true' spy='true'>
           Join Now
           </Link>
           </button>
+          
 
 
         <motion.div
@@ -86,8 +89,8 @@ const Hero = () => {
          transition={transition}
          className="heart-rate">
           <img src={heart} alt="" />
-          <span>Heart rate</span>
-          <span>bpm 116</span>
+          <span>Likes</span>
+          <span>138/post</span>
         </motion.div>
 
 {/* hero images */}
@@ -106,12 +109,13 @@ const Hero = () => {
          className="calories">
           <img src={calories} alt="" />
           <div>
-          <span>Calories Burned</span>
-          <span>220 kcal</span>
+          <span>Engagement</span>
+          <span>23.2%</span>
           </div>
         </motion.div>
       </div>
     </div>
+    </Router>
   )
 }
 

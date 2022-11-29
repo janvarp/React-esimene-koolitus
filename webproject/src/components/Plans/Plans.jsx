@@ -34,7 +34,7 @@ const Plans = () => {
                     <div>
                         <span>Vaata rohkem eeliseid</span>
                     </div>
-                    <button className="btn">Ühine siin</button>
+                    <button className="btn">Liitu siin</button>
                 </div>
             ))}
         </div>
