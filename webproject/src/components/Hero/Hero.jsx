@@ -21,7 +21,7 @@ const Hero = () => {
         <div className='left-h'>
           <Header/>
 
-{/*the best ad*/}
+{/*parim ad*/}
 
           <div className="the-best-ad">
             <motion.div
@@ -46,7 +46,7 @@ const Hero = () => {
             </div>
           </div>
 
-{/* figures */}
+{/* näidud */}
           <div className="figures">
           <div>
             <span>
@@ -68,7 +68,7 @@ const Hero = () => {
           </div>
           </div>
 
-{/* her-buttons */} 
+{/* nupud */} 
         <div className="hero-buttons">
             <button className="btn">Alusta</button>
             <button className="btn">Uuri veel</button>
@@ -97,7 +97,7 @@ const Hero = () => {
          transition={transition}
          src={hero_image_back} alt="" className="hero-image-back" />
 
-{/* calories */}
+{/* engagement */}
         <motion.div
          initial={{right: '37rem'}}
          whileInView={{right: '28rem'}}

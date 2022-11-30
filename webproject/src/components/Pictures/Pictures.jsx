@@ -17,16 +17,24 @@ const Pictures = () => {
         </div>
 
 {/* lahtrid */}
+<a href='https://www.google.com'>
         <div className="picture-categories">
-        {programsData.map((program)=>(
+        {programsData.map((program, index)=>(
+          
             <motion.div
+            key={index}
             whileHover={{background: 'var(--planCard)', cursor: 'pointer'}}
             transition={{type: 'spring'}}
+
             className="category">
+              
               <img src={program.image} alt='' />
+              
             </motion.div>
+            
             ))}
       </div>
+      </a>
     </div>
     
   )
