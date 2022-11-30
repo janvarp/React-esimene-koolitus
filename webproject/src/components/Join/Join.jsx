@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import {Button} from 'react'
 import './Join.css'
 import emailjs from "@emailjs/browser";
 
@@ -26,11 +27,11 @@ const Join = () => {
     <div className="left-j">
         <hr />
         <div>
-            <span className='stroke-text'>Siit saad</span>
-            <span>Saata</span></div>
+            <span className='stroke-text'>Küsimused</span>
+            <span>Võib</span></div>
         <div>
-            <span>Mulle</span>
-            <span className='stroke-text'>Emaili</span>
+            <span>Saata</span>
+            <span className='stroke-text'>Emailile</span>
         </div>
     </div>
     <div className="right-j">

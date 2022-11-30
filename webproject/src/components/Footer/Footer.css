@@ -25,6 +25,7 @@
 }
 .logo-f>img{
     width: 10rem;
+    border-radius: 3cm;
 }
 .Footer-container>:nth-child(3)
 {

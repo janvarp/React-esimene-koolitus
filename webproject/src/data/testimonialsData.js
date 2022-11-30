@@ -13,13 +13,13 @@ export const testimonialsData = [
   {
     image: image2,
     review: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ipsam, ab itaque nam perferendis impedit sint ',
-    name: 'JOHN KEVIN',
-    status: 'CUSTOMER'
+    name: 'KEVIN PÄRN',
+    status: 'KLIENT'
   },
   {
     image : image3,
     review:' Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima aspernatur quod voluptatem',
-    name: 'FRANKLIN',
-    status: "CUSTOMER"
+    name: 'FRANK NIINEMETS',
+    status: "KLIENT"
   }
 ];

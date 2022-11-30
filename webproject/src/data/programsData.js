@@ -7,7 +7,7 @@ export const programsData = [
     {
   
       image: i1
-
+      
     },
 
     {

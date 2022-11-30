@@ -34,6 +34,7 @@
     gap: 2rem;
     padding: 1.5rem;
     width: 15rem;
+    border-radius: 1rem;
   }
   .plan:nth-child(2){
       background: var(--planCard);
@@ -49,13 +50,16 @@
       font-size: 1rem;
       font-weight: bold;
   }
+
   .plan>:nth-child(3){
       font-size: 3rem;
       font-weight: bold;
   }
+
   .plan>:nth-child(5){
       font-size: 0.8rem;
   }
+
   .features{
       display: flex;
       flex-direction: column;

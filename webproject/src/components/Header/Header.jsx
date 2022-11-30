@@ -1,34 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import Logo from "../../assets/logo.png";
 import "./Header.css";
 import { Link } from "react-router-dom";
-import Bars from "../../assets/bars.png";
+
+
 const Header = () => {
-  const mobile = window.innerWidth <= 768 ? true : false;
-  const [menuOpened, setMenuOpened] = useState(false);
+  
   return (
-    <React.StrictMode>
+    
     <div className="header" id="header">
       <img src={Logo} alt="" className="logo" />
-      {(menuOpened===false && mobile===true)? (
-        <div
-          style={{ backgroundColor: "var(--appColor)", padding: "0.5rem", borderRadius: "5px" }}
-          onClick={() => setMenuOpened(true)}
-        >
-          <img
-            src={Bars}
-            alt="bars"
-            style={{ width: "1.5rem", height: "1.5rem" }}
-          />
-        </div>
-      ) : (
-        <ul className="header-menu">
+     
+       
+        <div className="header-menu">
           
           
-            <Link
-              onClick={() => setMenuOpened(false)}
+          
+            <Link to='header'
+              style={{ textDecoration: 'none' }}
               activeclass="active"
-              to="header"
               spy='true'
               smooth='true'
             >
@@ -36,9 +26,8 @@ const Header = () => {
             </Link>
           
           
-            <Link
-              onClick={() => setMenuOpened(false)}
-              to="pictures"
+            <Link to="pictures"
+              style={{ textDecoration: 'none' }}
               spy='true'
               smooth='true'
             >
@@ -47,7 +36,7 @@ const Header = () => {
           
           
             <Link
-              onClick={() => setMenuOpened(false)}
+              style={{ textDecoration: 'none' }}
               to="reasons"
               spy='true'
               smooth='true'
@@ -57,7 +46,7 @@ const Header = () => {
           
           
             <Link
-              onClick={() => setMenuOpened(false)}
+              style={{ textDecoration: 'none' }}
               to="pictures"
               spy='true'
               smooth='true'
@@ -67,7 +56,7 @@ const Header = () => {
           
           
             <Link
-              onClick={() => setMenuOpened(false)}
+              style={{ textDecoration: 'none' }}
               to="testimonials"
               spy='true'
               smooth='true'
@@ -75,11 +64,11 @@ const Header = () => {
               Arvustused
             </Link>
           
-      
-        </ul>
-      )}
+            
+        </div>
+    
     </div>
-    </React.StrictMode>
+    
   );
 };
 

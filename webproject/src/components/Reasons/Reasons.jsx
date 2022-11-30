@@ -29,25 +29,25 @@ const Reasons = () => {
             <div className='details-r'>
             <div>
               <img src={tick} alt="" />
-              <span>Lorem Ipsum</span>
+              <span>kõige</span>
             </div>
             <div>
               <img src={tick} alt="" />
-              <span>Lorem Ipsum</span>
+              <span>paremad</span>
             </div>
             <div>
               <img src={tick} alt="" />
-              <span>Lorem Ipsum</span>
+              <span>hinnad</span>
             </div>
             <div>
               <img src={tick} alt="" />
-              <span>Lorem Ipsum</span>
+              <span>eestis</span>
             </div>
           </div>
           <span style={{
             color : 'var(--gray)', fontWeight: 'normal',
             }}
-            >MINU SPONSORID
+            >SPONSORID:
             </span>
 
             <div className="partner">

@@ -17,14 +17,13 @@ const Pictures = () => {
         </div>
 
 {/* lahtrid */}
-        <div onClick='https://www.instagram.com/simplyjants/'  className="picture-categories">
+        <div className="picture-categories">
         {programsData.map((program)=>(
             <motion.div
             whileHover={{background: 'var(--planCard)', cursor: 'pointer'}}
             transition={{type: 'spring'}}
             className="category">
               <img src={program.image} alt='' />
-            
             </motion.div>
             ))}
       </div>

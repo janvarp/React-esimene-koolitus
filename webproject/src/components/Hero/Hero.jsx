@@ -25,11 +25,11 @@ const Hero = () => {
 
           <div className="the-best-ad">
             <motion.div
-              initial={{left: {mobile}? "178px": '238px'}}
+              initial={{left: {mobile}? "238px": '238px'}}
               whileInView={{left: '8px'}}
               transition={{...transition, type: 'tween'}}
             />
-            <span>eesti parim autofotograaf linnas</span>
+            <span>EESTI PARIM AUTOFOTOGRAAF LINNAS</span>
           </div>
 
 {/* Hero heading*/}
@@ -69,19 +69,15 @@ const Hero = () => {
           </div>
 
 {/* her-buttons */} 
-          <div className="hero-buttons">
+        <div className="hero-buttons">
             <button className="btn">Alusta</button>
             <button className="btn">Uuri veel</button>
-          </div>
         </div>
-      <div className='right-h'>
-      <button className="btn">
-          <Link to = 'join-us' smooth='true' spy='true'>
-          Join Now
-          </Link>
-          </button>
-          
-
+        </div>
+        <div className='right-h'>
+        <button className="btn">
+              Liitu kohe
+        </button>
 
         <motion.div
          initial={{right: '-1rem'}}

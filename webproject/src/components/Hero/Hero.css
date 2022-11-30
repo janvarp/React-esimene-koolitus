@@ -13,9 +13,9 @@
   }
   
   .right-h {
-    background: var(--planCard);
     flex: 1;
     position: relative;
+    border-radius: 1rem;
   }
 
   .hero-blur {
@@ -105,9 +105,10 @@
   /* right side */
   .right-h > .btn {
     position: absolute;
-    right: 3rem;
-    top: 2rem;
+    right: 7rem;
+    top: 3rem;
     color: black;
+    border-radius: 3rem;
   }
   
   .heart-rate {
@@ -117,7 +118,7 @@
     background-color: var(--darkGrey);
     width: fit-content;
     padding: 1rem;
-    align-items: start;
+    align-items: flex-start;
     border-radius: 5px;
     position: absolute;
     right: 4rem;
@@ -136,10 +137,10 @@
   
   .hero-image {
     position: absolute;
-    top: 16.6rem;
-    right: 6rem;
-    height: 30rem;
-    width: 23rem;
+    top: 10rem;
+    right: 5rem;
+    height: 35rem;
+    width: 24rem;
   }
   .hero-image-back {
     position: absolute;
